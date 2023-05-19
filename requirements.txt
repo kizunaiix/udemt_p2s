@@ -7,3 +7,4 @@ opencv-python-headless
 tqdm
 scipy==1.5
 visdom
+tensorboardX
