@@ -5,6 +5,8 @@ import pickle
 import subprocess
 import time
 
+python_loc = "/root/miniconda3/envs/p2s/bin/python"
+
 #事前准备：建立存放结果的文件夹
 result = subprocess.run(f"mkdir ./all_results",shell=True,stdout=subprocess.PIPE)
 print(result.stdout.decode('utf-8'))
@@ -43,7 +45,7 @@ for k,v in ply_verts_dict.items():
         f.write(f"pulmonaryArterys_ply/{k[:-4]}\n"*32)
 
     #执行train.py
-    result = subprocess.run(f"cd ./Point2Skeleton/src/;python train.py --pc_list_file ../data/data-split/all-train.txt --data_root ../data/pointclouds/ --point_num {v} --skelpoint_num 100 --gpu 0",shell=True,stdout=subprocess.PIPE)
+    result = subprocess.run(f"cd ./Point2Skeleton/src/;{python_loc} train.py --pc_list_file ../data/data-split/all-train.txt --data_root ../data/pointclouds/ --point_num {v} --skelpoint_num 100 --gpu 0",shell=True,stdout=subprocess.PIPE)
     print(result.stdout.decode('utf-8'))
 
     #移动training-weights文件夹里的文件到weights文件夹
@@ -55,7 +57,7 @@ for k,v in ply_verts_dict.items():
         f.write(f"pulmonaryArterys_ply/{k[:-4]}")
 
     #执行test.py
-    result = subprocess.run(f"cd ./Point2Skeleton/src/;python test.py --pc_list_file ../data/data-split/all-test.txt --data_root ../data/pointclouds/ --point_num {v} --skelpoint_num 100 --gpu 0 --load_skelnet_path ../weights/weights-skelpoint.pth --load_gae_path ../weights/weights-gae.pth --save_result_path ../results/",shell=True,stdout=subprocess.PIPE)
+    result = subprocess.run(f"cd ./Point2Skeleton/src/;{python_loc} test.py --pc_list_file ../data/data-split/all-test.txt --data_root ../data/pointclouds/ --point_num {v} --skelpoint_num 100 --gpu 0 --load_skelnet_path ../weights/weights-skelpoint.pth --load_gae_path ../weights/weights-gae.pth --save_result_path ../results/",shell=True,stdout=subprocess.PIPE)
     print(result.stdout.decode('utf-8'))
 
     #从Point2Skeleton/data/pointclouds/pulmonaryArterys_ply里找到原文件，复制其并放入result文件夹。
