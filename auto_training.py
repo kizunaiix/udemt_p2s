@@ -15,16 +15,16 @@ with open("vertex_count.pkl","rb") as f:
 print(f"dict getted!\n len(dict):{len(ply_verts_dictXXXXX)}")
 
 #截短dict，用作测试
-def dict_slice(adict, start, end):
-    keys = adict.keys()
-    dict_slice = {}
-    for k in list(keys)[start:end]:
-        dict_slice[k] = adict[k]
-    return dict_slice
+# def dict_slice(adict, start, end):
+#     keys = adict.keys()
+#     dict_slice = {}
+#     for k in list(keys)[start:end]:
+#         dict_slice[k] = adict[k]
+#     return dict_slice
 
-ply_verts_dict = dict_slice(ply_verts_dictXXXXX,0,1)
+# ply_verts_dict = dict_slice(ply_verts_dictXXXXX,0,1)
 
-# ply_verts_dict = ply_verts_dictXXXXX        #正式使用的时候就要带上这一句了。
+ply_verts_dict = ply_verts_dictXXXXX        #正式使用的时候就要带上这一句了。
 
 #清空results，weights和training-weights文件夹
 result = subprocess.run("rm -rf ./Point2Skeleton/results/* ./Point2Skeleton/weights/* ./Point2Skeleton/training-weights/*",shell=True,stdout=subprocess.PIPE)
