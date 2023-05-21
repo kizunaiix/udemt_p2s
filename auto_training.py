@@ -6,8 +6,8 @@ import subprocess
 import time
 
 #一些配置：
-# python_loc = "/root/miniconda3/envs/p2s/bin/python"    #python解释器位置
-python_loc = "python"
+python_loc = "/root/miniconda3/envs/p2s/bin/python"    #python解释器位置
+# python_loc = "python"
 TESTing = True                                         #True:截短dict，用作测试   False:正式运行
 
 def dict_slice(adict, start, end):
