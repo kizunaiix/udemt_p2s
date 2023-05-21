@@ -22,7 +22,7 @@ def dict_slice(adict, start, end):
 
 
 #事前准备：建立存放结果的文件夹
-result = subprocess.run(f"mkdir ./all_results/;./Point2Skeleton/results/;./Point2Skeleton/weights/",shell=True,stdout=subprocess.PIPE)
+result = subprocess.run(f"mkdir ./all_results/;mkdir ./Point2Skeleton/results/;mkdir ./Point2Skeleton/weights/",shell=True,stdout=subprocess.PIPE)
 print(result.stdout.decode('utf-8'))
 
 # 获取字典
