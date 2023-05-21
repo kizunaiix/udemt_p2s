@@ -5,7 +5,21 @@ import pickle
 import subprocess
 import time
 
-python_loc = "/root/miniconda3/envs/p2s/bin/python"
+#一些配置：
+# python_loc = "/root/miniconda3/envs/p2s/bin/python"    #python解释器位置
+python_loc = "python"
+TESTing = True                                         #True:截短dict，用作测试   False:正式运行
+
+def dict_slice(adict, start, end):
+    """
+    用于截短dict
+    """
+    keys = adict.keys()
+    dict_slice = {}
+    for k in list(keys)[start:end]:
+        dict_slice[k] = adict[k]
+    return dict_slice
+
 
 #事前准备：建立存放结果的文件夹
 result = subprocess.run(f"mkdir ./all_results",shell=True,stdout=subprocess.PIPE)
@@ -16,17 +30,12 @@ with open("vertex_count.pkl","rb") as f:
     ply_verts_dictXXXXX = pickle.load(f)
 print(f"dict getted!\n len(dict):{len(ply_verts_dictXXXXX)}")
 
-#截短dict，用作测试
-# def dict_slice(adict, start, end):
-#     keys = adict.keys()
-#     dict_slice = {}
-#     for k in list(keys)[start:end]:
-#         dict_slice[k] = adict[k]
-#     return dict_slice
+if TESTing==True:
+    # 截短dict，用作测试    
+    ply_verts_dict = dict_slice(ply_verts_dictXXXXX,0,1)
+else:
+    ply_verts_dict = ply_verts_dictXXXXX         #正式使用的时候就要带上这一句了。
 
-# ply_verts_dict = dict_slice(ply_verts_dictXXXXX,0,1)
-
-ply_verts_dict = ply_verts_dictXXXXX        #正式使用的时候就要带上这一句了。
 
 #清空results，weights和training-weights文件夹
 result = subprocess.run("rm -rf ./Point2Skeleton/results/* ./Point2Skeleton/weights/* ./Point2Skeleton/training-weights/*",shell=True,stdout=subprocess.PIPE)
