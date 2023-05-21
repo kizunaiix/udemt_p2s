@@ -22,7 +22,7 @@ def dict_slice(adict, start, end):
 
 
 #事前准备：建立存放结果的文件夹
-result = subprocess.run(f"mkdir ./all_results",shell=True,stdout=subprocess.PIPE)
+result = subprocess.run(f"mkdir ./all_results/;./Point2Skeleton/results/;./Point2Skeleton/weights/",shell=True,stdout=subprocess.PIPE)
 print(result.stdout.decode('utf-8'))
 
 # 获取字典
@@ -40,7 +40,6 @@ else:
 #清空results，weights和training-weights文件夹
 result = subprocess.run("rm -rf ./Point2Skeleton/results/* ./Point2Skeleton/weights/* ./Point2Skeleton/training-weights/*",shell=True,stdout=subprocess.PIPE)
 print(result.stdout.decode('utf-8'))
-
 print("results/,weights/ and training-weights/ : CLEARED.\n")
 
 
